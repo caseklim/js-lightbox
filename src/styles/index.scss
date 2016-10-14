@@ -1,142 +1,18 @@
-body {
-  background-color: #f5f5f5;
-  margin: 0 auto;
-  max-width: 1200px;
-}
+/**
+ * Imports for all application styles
+ */
 
-button {
-  background: none;
-  border: 0;
-  padding: 0;
-}
+/**
+ * Global styles
+ */
+@import "variables";
+@import "mixins";
+@import "global";
 
-.a11y-hidden {
-  position: absolute;
-  left: -10000px;
-  overflow: hidden;
-  top: auto;
-  width: 1px;
-  height: 1px;
-}
-
-.thumbnails-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  &__item {
-    border: 1em solid white;
-    box-sizing: border-box;
-    display: flex;
-    align-items: flex-start;
-    align-content: flex-start;
-    margin: 0.5em;
-    overflow: hidden;
-    position: relative;
-    padding-bottom: 92%;
-    width: 100%;
-  }
-
-  &__thumbnail {
-    background-color: #fff;
-    min-width: 100%;
-    min-height: 100%;
-    position: absolute;
-    width: auto;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-}
-
-@media all and (min-width: 40em) {
-  .thumbnails-list__item {
-    padding-bottom: 41%;
-    width: 45%;
-  }
-}
-
-@media all and (min-width: 60em) {
-  .thumbnails-list__item {
-    padding-bottom: 27%;
-    width: 30%;
-  }
-}
-
-.modal {
-  background-color: rgba(0,0,0,0.4);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  left: 0;
-  top: 0;
-  position: fixed;
-  overflow: auto;
-  transition: visibility 0s, opacity 0.2s linear;
-  visibility: hidden;
-  z-index: 1;
-
-  &--visible {
-    visibility: visible;
-    opacity: 1;
-  }
-
-  &__content {
-    background-color: #fff;
-    margin: 0 auto;
-    padding: 2em;
-    box-shadow: 10px 10px 15px rgba(0,0,0,0.2);
-    width: 80%;
-
-    img {
-      display: flex;
-      margin: 0 auto;
-    }
-  }
-
-  &__close {
-    color: #a6a6a6;
-    float: right;
-    font-size: 2em;
-    font-weight: bold;
-    margin-top: -10px;
-    -moz-transition: color .1s;
-    -o-transition: color .1s;
-    -webkit-transition: color .1s;
-    transition: color .1s;
-
-    &:hover,
-    &:focus {
-      color: #666;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  }
-}
-
-.navigator {
-  color: #fff;
-  font-size: 2em;
-  font-weight: bold;
-  z-index: 2;
-
-  &:hover,
-  &:focus {
-    cursor: pointer;
-  }
-
-  &--prev {
-    margin-left: 3em;
-  }
-
-  &--next {
-    margin-right: 3em;
-  }
-}
+/**
+ * Chunks of UI styles
+ */
+@import "loading";
+@import "modal";
+@import "navigator";
+@import "thumbnails-list";

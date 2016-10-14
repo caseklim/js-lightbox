@@ -1,0 +1,51 @@
+/**
+ * Styles for the image thumbnails grid
+ */
+
+.thumbnails-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    border: 1em solid white;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    margin: 0.5em;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 92%;
+    width: 100%;
+  }
+
+  &__thumbnail {
+    background-color: #fff;
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    width: auto;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@media all and (min-width: 40em) {
+  .thumbnails-list__item {
+    padding-bottom: 41%;
+    width: 45%;
+  }
+}
+
+@media all and (min-width: 60em) {
+  .thumbnails-list__item {
+    padding-bottom: 27%;
+    width: 30%;
+  }
+}

@@ -7,60 +7,39 @@ if (module.hot) {
 import 'babel-polyfill';
 import '../styles/index.scss';
 
+import Lightbox from './lightbox.js';
+
 const apiMethod = 'flickr.photosets.getPhotos';
 const apiKey = 'd25bfd5e4f8bd67871b131d73825ca74'; // TODO: Conceal this
 const photosetId = '72157645388455379';
 
 const flickrUrl = `https://api.flickr.com/services/rest/?method=${apiMethod}&api_key=${apiKey}&photoset_id=${photosetId}&format=json`;
 
-let photosList;
-let currentPhotoIndex;
+let theLightbox;
 
-function showModal(e) {
-  const modal = document.querySelector('.modal');
+/**
+ * Handle the response from the Flickr API request
+ * @param  {Event} e Event indicating the request state chaged
+ * @return {undefined}
+ */
+function handleResponse(evt) {
+  const target = evt.target;
 
-  let img = document.createElement('img');
-  img.src = e.target.src;
-  img.alt = e.target.alt;
-  img.title = e.target.title;
-
-  document.querySelector('.modal__content').appendChild(img);
-  modal.className += ' modal--visible';
-}
-
-function hideModal(e) {
-  const modal = document.querySelector('.modal');
-  const modalContent = document.querySelector('.modal__content');
-  const modalPhoto = modalContent.lastElementChild;
-
-  modalContent.removeChild(modalPhoto);
-  modal.className = 'modal';
-}
-
-function showPreviousPhoto(e) {
-  console.log(photosList);
-}
-
-function showNextPhoto(e) {
-  console.log(photosList);
-}
-
-function handleResponse(e) {
-  const target = e.target;
-
-  if (target.readyState == 4 && target.status == 200) {
+  if (target.readyState === 4 && target.status === 200) {
     let jsonResponse;
-    // let photosList;
+    let photosList;
     let responseText = target.responseText;
 
     // TODO: Use a regex instead
-    // Convert text response into valid JSON
+    // Convert the text response into valid JSON
     responseText = responseText.replace('jsonFlickrApi(', '');
     responseText = responseText.substring(responseText, responseText.length - 1);
 
     // Parse the text response into JSON
     jsonResponse = JSON.parse(responseText);
     photosList = jsonResponse.photoset.photo;
+
+    theLightbox = new Lightbox(photosList);
 
     for (let i = 0, len = photosList.length; i < len; i++) {
       const photo = photosList[i];
@@ -78,34 +57,20 @@ function handleResponse(e) {
       let img = document.createElement('img');
       img.src = photoUrl;
       img.alt = photo.title;
-      img.title = photo.title;
       img.className = 'thumbnails-list__thumbnail';
-      img.onclick = showModal;
+      img.setAttribute('data-index', i);
+      img.addEventListener('click', (evt) => theLightbox.showModal(evt));
 
       listItem.appendChild(img);
       document.querySelector('.thumbnails-list').appendChild(listItem);
     }
+
+    // Hide the loading indicator once all thumbnails have been created
+    document.querySelector('.loading').className += ' loading--hidden';
   }
 }
 
-const span = document.querySelector('.modal__close');
-span.onclick = hideModal;
-
-const prevPhotoNav = document.querySelector('.navigator--prev');
-prevPhotoNav.onclick = showPreviousPhoto;
-
-const nextPhotoNav = document.querySelector('.navigator--next');
-nextPhotoNav.onclick = showNextPhoto;
-
-window.onclick = function(e) {
-  const modal = document.querySelector('.modal');
-
-  if (e.target === modal) {
-    hideModal(e);
-  }
-};
-
 let xhr = new XMLHttpRequest();
-xhr.onreadystatechange = handleResponse;
+xhr.addEventListener('readystatechange', (evt) => handleResponse(evt));
 xhr.open('GET', flickrUrl, true);
 xhr.send();

@@ -1,0 +1,24 @@
+/**
+ * Styles for unclassed HTML elements and global classes
+ */
+
+body {
+  background-color: $background-color;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.a11y-hidden {
+  position: absolute;
+  left: -10000px;
+  overflow: hidden;
+  top: auto;
+  width: 1px;
+  height: 1px;
+}

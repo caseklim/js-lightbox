@@ -1,0 +1,37 @@
+/**
+ * Styles for the photo navigator
+ */
+
+.navigator {
+  color: #fff;
+  font-size: 2em;
+  font-weight: bold;
+  height: 32px;
+  width: 32px;
+  z-index: 2;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+
+  &__icon {
+    @include svg-bg();
+
+    .navigator--prev & {
+      background-image: url('../../assets/back-2.svg');
+    }
+
+    .navigator--next & {
+      background-image: url('../../assets/next-2.svg');
+    }
+  }
+
+  &--prev {
+    margin: 0 2em 0 1em;
+  }
+
+  &--next {
+    margin: 0 1em 0 2em;
+  }
+}

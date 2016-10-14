@@ -5,20 +5,26 @@
   <title>Simple JavaScript Lightbox</title>
 </head>
 <body>
+  <div class="loading">
+    <div class="loading__content">
+      <div class="loading__icon"></div>
+      <span class="a11y-hidden">Loading...</span>
+    </div>
+  </div>
   <ul class="thumbnails-list"></ul>
   <div class="modal">
     <button role="button" class="navigator navigator--prev">
-      &lt;
+      <div class="navigator__icon"></div>
       <span class="a11y-hidden">Previous Photo</span>
     </button>
     <div class="modal__content">
       <button role="button" class="modal__close">
-        ×
+        <div class="modal__icon"></div>
         <span class="a11y-hidden">Close Modal</span>
       </button>
     </div>
     <button role="button" class="navigator navigator--next">
-      &gt;
+      <div class="navigator__icon"></div>
       <span class="a11y-hidden">Next Photo</span>
     </button>
   </div>

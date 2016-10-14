@@ -17,7 +17,7 @@ module.exports = (options) => {
     ],
     output: {
       path: Path.join(__dirname, 'dist'),
-      filename: 'bundle.js'
+      filename: 'bundle.js',
     },
     plugins: [
       new Webpack.DefinePlugin({
@@ -37,6 +37,12 @@ module.exports = (options) => {
         query: {
           presets: ['es2015']
         }
+      }, {
+        test: /\.svg$/,
+        include: [
+          Path.join(__dirname, 'assets')
+        ],
+        loader: 'file',
       }]
     }
   };
