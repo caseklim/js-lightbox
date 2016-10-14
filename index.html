@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple JavaScript Lightbox</title>
+<link href="/assets/styles/bundle.css" rel="stylesheet"></head>
+<body>
+  <div class="loading">
+    <div class="loading__content">
+      <div class="loading__icon"></div>
+      <span class="a11y-hidden">Loading...</span>
+    </div>
+  </div>
+  <div class="error error--hidden">
+    <div class="error__content">
+      <div class="error__icon"></div>
+      <span class="a11y-hidden">Sad Face</span>
+    </div>
+    <h1 class="error__title">Photos couldn't be loaded, sorry!</h1>
+    <pre class="error__reason"></pre>
+  </div>
+  <ul class="thumbnails-list"></ul>
+  <div class="modal">
+    <button role="button" class="navigator navigator--prev">
+      <div class="navigator__icon"></div>
+      <span class="a11y-hidden">Previous Photo</span>
+    </button>
+    <div class="modal__content">
+      <button role="button" class="modal__close">
+        <div class="modal__icon"></div>
+        <span class="a11y-hidden">Close Modal</span>
+      </button>
+    </div>
+    <button role="button" class="navigator navigator--next">
+      <div class="navigator__icon"></div>
+      <span class="a11y-hidden">Next Photo</span>
+    </button>
+  </div>
+<script type="text/javascript" src="/assets/bundle.js"></script></body>
+</html>
