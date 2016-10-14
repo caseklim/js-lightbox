@@ -1,0 +1,31 @@
+/**
+ * Styles for error screen
+ */
+
+.error {
+  @include full-screen-content-centered();
+  background: $background-color;
+  flex-direction: column;
+  z-index: 4;
+
+  &--hidden {
+    display: none;
+  }
+
+  &__content {
+    width: 64px;
+    height: 64px;
+  }
+
+  &__icon {
+    @include svg-bg();
+    background-image: url('../../assets/sad.svg');
+  }
+
+  &__reason {
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    margin: 0;
+    padding: 1em;
+  }
+}

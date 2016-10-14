@@ -1,7 +1,7 @@
 /**
  * @class Lightbox
  * @classdesc Displays a photo from a grid in a modal window, with the
- * ability to move to the next and previous photos in the grid.
+ * ability to move to the next and previous photos in the grid
  */
 class Lightbox {
 
