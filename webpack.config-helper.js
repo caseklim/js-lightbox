@@ -17,6 +17,7 @@ module.exports = (options) => {
     ],
     output: {
       path: Path.join(__dirname, 'dist'),
+      publicPath: '/js-lightbox/'
       filename: 'bundle.js',
     },
     plugins: [
