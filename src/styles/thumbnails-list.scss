@@ -27,14 +27,14 @@
   }
 
   &__thumbnail {
-    background-color: #fff;
     min-width: 100%;
     min-height: 100%;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: 25%;
+    transform: translateX(-25%);
 
     &:hover {
       cursor: pointer;
