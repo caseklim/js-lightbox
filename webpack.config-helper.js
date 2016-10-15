@@ -17,8 +17,8 @@ module.exports = (options) => {
     ],
     output: {
       path: Path.join(__dirname, 'dist'),
-      publicPath: '/js-lightbox/'
-      filename: 'bundle.js',
+      publicPath: '/js-lightbox/',
+      filename: 'bundle.js'
     },
     plugins: [
       new Webpack.DefinePlugin({
@@ -90,5 +90,4 @@ module.exports = (options) => {
   }
 
   return webpackConfig;
-
 }
