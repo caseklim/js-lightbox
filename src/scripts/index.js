@@ -13,13 +13,14 @@ import PhotoGrid from './photo-grid.js';
 const searchMatches = window.location.search.match(/\?photosetId=(\d+)/);
 
 let photosetId = '72157669701568203';
+let flickrApi;
 
 // Use default photoset ID unless one is provided through query params
 if (searchMatches) {
   photosetId = searchMatches[1];
 }
 
-const flickrApi = new FlickrApi(photosetId);
+flickrApi = new FlickrApi(photosetId);
 
 flickrApi.makeRequest().then((photosList) => {
   const photoGrid = new PhotoGrid(photosList);

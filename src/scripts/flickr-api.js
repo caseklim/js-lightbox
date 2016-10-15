@@ -11,7 +11,6 @@ class FlickrApi {
    * @return {FlickrApi}
    */
   constructor(photosetId) {
-    // TODO: Hide API key from GitHub
     this.apiKey = 'd25bfd5e4f8bd67871b131d73825ca74';
     this.apiMethod = 'flickr.photosets.getPhotos';
     this.photosetId = photosetId;
