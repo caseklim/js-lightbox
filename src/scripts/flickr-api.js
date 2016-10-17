@@ -11,20 +11,20 @@ class FlickrApi {
    * @return {FlickrApi}
    */
   constructor(photosetId) {
-    this.apiKey = 'd25bfd5e4f8bd67871b131d73825ca74';
-    this.apiMethod = 'flickr.photosets.getPhotos';
-    this.photosetId = photosetId;
-    this.requestUrl = this.createRequestUrl();
+    this._apiKey = 'd25bfd5e4f8bd67871b131d73825ca74';
+    this._apiMethod = 'flickr.photosets.getPhotos';
+    this._photosetId = photosetId;
+    this._requestUrl = this._createRequestUrl();
   }
 
   /**
    * Generates a URL to fetch data for a photoset from the Flickr API
    * @return {String} URL that fetches photoset data from Flickr
    */
-  createRequestUrl() {
-    const methodParam = `method=${this.apiMethod}`;
-    const apiKeyParam = `api_key=${this.apiKey}`;
-    const photosetIdParam = `photoset_id=${this.photosetId}`;
+  _createRequestUrl() {
+    const methodParam = `method=${this._apiMethod}`;
+    const apiKeyParam = `api_key=${this._apiKey}`;
+    const photosetIdParam = `photoset_id=${this._photosetId}`;
     const formatParam = 'format=json';
     const queryParams = [
       methodParam,
@@ -37,13 +37,32 @@ class FlickrApi {
   }
 
   /**
+   * Handle the response from the Flickr API
+   * @param  {String} response String response containing photo data
+   * @return {Object}          Object representation of API data
+   */
+  _parseResponse(response) {
+    const responseContent = response.match(/jsonFlickrApi\((.*)\)/)[1];
+    const thumbnailsList = document.querySelector('.thumbnails-list');
+
+    // Parse the text response into JSON
+    const jsonResponse = JSON.parse(responseContent);
+
+    if (!jsonResponse.photoset) {
+      throw new Error(jsonResponse.message);
+    }
+
+    return jsonResponse.photoset.photo;
+  }
+
+  /**
    * Sends the request to the Flickr API
    * @return {Promise} Promise-wrapped XHR request
    */
   makeRequest() {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
-      xhr.open('GET', this.requestUrl);
+      xhr.open('GET', this._requestUrl);
       xhr.onload = () => {
         if (xhr.status === 200) {
           resolve(xhr.response);
@@ -55,26 +74,7 @@ class FlickrApi {
         reject(xhr.statusText);
       };
       xhr.send();
-    }).then((response) => this.parseResponse(response));
-  }
-
-  /**
-   * Handle the response from the Flickr API
-   * @param  {String} response String response containing photo data
-   * @return {Object}          Object representation of API data
-   */
-  parseResponse(response) {
-    const responseText = response.match(/jsonFlickrApi\((.*)\)/)[1];
-    const thumbnailsList = document.querySelector('.thumbnails-list');
-
-    // Parse the text response into JSON
-    const jsonResponse = JSON.parse(responseText);
-
-    if (!jsonResponse.photoset) {
-      throw new Error(jsonResponse.message);
-    }
-
-    return jsonResponse.photoset.photo;
+    }).then((response) => this._parseResponse(response));
   }
 }
 

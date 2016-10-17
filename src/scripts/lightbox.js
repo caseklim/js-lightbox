@@ -11,67 +11,45 @@ class Lightbox {
    * @return {Lightbox}
    */
   constructor(photosList) {
-    this.photosList = photosList;
+    this._photosList = photosList;
 
-    this.modal = document.querySelector('.modal');
-    this.modalClose = document.querySelector('.modal__close');
-    this.navPrev = this.modal.querySelector('.navigator--prev');
-    this.navNext = this.modal.querySelector('.navigator--next');
+    this._modal = document.querySelector('.modal');
+    this._modalClose = document.querySelector('.modal__close');
+    this._navPrev = this._modal.querySelector('.navigator--prev');
+    this._navNext = this._modal.querySelector('.navigator--next');
 
-    this.isVisible = false;
+    this._isVisible = false;
 
-    this.initializeEventListeners();
+    this._initializeEventListeners();
   }
 
   /**
    * Initialize event listeners for this component
    * @return {undefined}
    */
-  initializeEventListeners() {
-    window.addEventListener('click', (evt) => this.hideBackground(evt));
-    window.addEventListener('keydown', (evt) => this.handleKeyDown(evt));
+  _initializeEventListeners() {
+    window.addEventListener('click', (evt) => this._hideBackground(evt));
+    window.addEventListener('keydown', (evt) => this._handleKeyDown(evt));
 
-    this.modalClose.addEventListener('click', () => this.hideModal());
-    this.navPrev.addEventListener('click', () => this.showPreviousPhoto());
-    this.navNext.addEventListener('click', () => this.showNextPhoto());
-  }
-
-  /**
-   * Show the modal window with the photo clicked on by the user
-   * @param  {MouseEvent} evt Mouse event triggered by user click
-   * @return {undefined}
-   */
-  showModal(evt) {
-    const modalContent = this.modal.querySelector('.modal__content');
-
-    let img = evt.target.cloneNode(false);
-    img.className = '';
-
-    let imgTitle = document.createElement('h1');
-    imgTitle.innerHTML = img.alt;
-    imgTitle.className = 'modal__title';
-
-    modalContent.appendChild(imgTitle);
-    modalContent.appendChild(img);
-
-    this.modal.className += ' modal--visible';
-    this.isVisible = true;
+    this._modalClose.addEventListener('click', () => this._hideModal());
+    this._navPrev.addEventListener('click', () => this._showPreviousPhoto());
+    this._navNext.addEventListener('click', () => this._showNextPhoto());
   }
 
   /**
    * Hides the modal window
    * @return {undefined}
    */
-  hideModal() {
-    const modalContent = this.modal.querySelector('.modal__content');
+  _hideModal() {
+    const modalContent = this._modal.querySelector('.modal__content');
     const img = modalContent.querySelector('img');
     const imgTitle = modalContent.querySelector('.modal__title');
 
     modalContent.removeChild(img);
     modalContent.removeChild(imgTitle);
 
-    this.modal.className = 'modal';
-    this.isVisible = false;
+    this._modal.className = 'modal';
+    this._isVisible = false;
   }
 
   /**
@@ -79,9 +57,9 @@ class Lightbox {
    * @param  {MouseEvent} evt Mouse event triggered by user click
    * @return {undefined}
    */
-  hideBackground(evt) {
-    if (evt.target === this.modal) {
-      this.hideModal();
+  _hideBackground(evt) {
+    if (evt.target === this._modal) {
+      this._hideModal();
     }
   }
 
@@ -89,8 +67,8 @@ class Lightbox {
    * Shows the next photo in the grid relative to the current photo
    * @return {undefined}
    */
-  showPreviousPhoto() {
-    const modalContent = this.modal.querySelector('.modal__content');
+  _showPreviousPhoto() {
+    const modalContent = this._modal.querySelector('.modal__content');
     const img = modalContent.querySelector('img');
     const modalTitle = modalContent.querySelector('.modal__title');
     const currentIndex = parseInt(img.getAttribute('data-index'));
@@ -110,12 +88,12 @@ class Lightbox {
    * Shows the previous photo in the grid relative to the current photo
    * @return {undefined}
    */
-  showNextPhoto() {
-    const modalContent = this.modal.querySelector('.modal__content');
+  _showNextPhoto() {
+    const modalContent = this._modal.querySelector('.modal__content');
     const img = modalContent.querySelector('img');
     const modalTitle = modalContent.querySelector('.modal__title');
     const currentIndex = parseInt(img.getAttribute('data-index'));
-    const numPhotos = this.photosList.length;
+    const numPhotos = this._photosList.length;
     const nextIndex = (currentIndex + 1) < (numPhotos) ? (currentIndex + 1) : (numPhotos - 1);
 
     let nextImg = document.querySelector(`[data-index="${nextIndex}"]`);
@@ -133,24 +111,46 @@ class Lightbox {
    * @param  {KeyboardEvent} evt Keyboard event triggered by key press
    * @return {undefined}
    */
-  handleKeyDown(evt) {
+  _handleKeyDown(evt) {
     const e = evt || window.event;
 
-    if (this.isVisible) {
+    if (this._isVisible) {
       switch (e.keyCode) {
         case 27: // Escape
-          this.hideModal();
+          this._hideModal();
           break;
         case 37: // Left
-          this.showPreviousPhoto();
+          this._showPreviousPhoto();
           break;
         case 39: // Right
-          this.showNextPhoto();
+          this._showNextPhoto();
           break;
         default:
           break;
       }
     }
+  }
+
+  /**
+   * Show the modal window with the photo clicked on by the user
+   * @param  {MouseEvent} evt Mouse event triggered by user click
+   * @return {undefined}
+   */
+  showModal(evt) {
+    const modalContent = this._modal.querySelector('.modal__content');
+
+    let img = evt.target.cloneNode(false);
+    img.className = '';
+
+    let imgTitle = document.createElement('h1');
+    imgTitle.innerHTML = img.alt;
+    imgTitle.className = 'modal__title';
+
+    modalContent.appendChild(imgTitle);
+    modalContent.appendChild(img);
+
+    this._modal.className += ' modal--visible';
+    this._isVisible = true;
   }
 }
 

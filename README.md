@@ -1,7 +1,12 @@
 # js-lightbox
 
-A web page that shows a grid of photo thumbnails that when clicked, display the respective photo in a lightbox view.
+A web page that shows a grid of photo thumbnails from a Flickr photoset that when clicked, display the respective photo in a lightbox view.
 
+To specify a photoset to display, use the `photosetId` query parameter as follows:
+[https://cklimkowsky.github.io/js-lightbox/?photosetId=72157635752143595](https://cklimkowsky.github.io/js-lightbox/?photosetId=72157635752143595)
+
+A default photoset is provided for convenience as well:
+[https://cklimkowsky.github.io/js-lightbox/](https://cklimkowsky.github.io/js-lightbox/)
 
 ### Installation
 

@@ -12,6 +12,7 @@ import PhotoGrid from './photo-grid.js';
 
 const searchMatches = window.location.search.match(/\?photosetId=(\d+)/);
 
+// Default photoset ID if query param isn't provided
 let photosetId = '72157669701568203';
 let flickrApi;
 

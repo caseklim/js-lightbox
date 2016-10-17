@@ -12,20 +12,20 @@ class PhotoGrid {
    * @return {PhotoGrid}
    */
   constructor(photosList) {
-    this.thumbnailsList = document.querySelector('.thumbnails-list');
+    this._thumbnailsList = document.querySelector('.thumbnails-list');
 
     for (let i = 0, len = photosList.length; i < len; i++) {
       const photo = photosList[i];
-      const img = this.createImageThumbnail(photo, i);
+      const img = this._createImageThumbnail(photo, i);
 
       let listItem = document.createElement('li');
       listItem.className = 'thumbnails-list__item';
 
       listItem.appendChild(img);
-      this.thumbnailsList.appendChild(listItem);
+      this._thumbnailsList.appendChild(listItem);
     }
 
-    this.photoBox = new Lightbox(photosList);
+    this._photoBox = new Lightbox(photosList);
 
     // Hide the loading indicator once DOM has been initialized
     document.querySelector('.loading').className += ' loading--hidden';
@@ -37,7 +37,7 @@ class PhotoGrid {
    * @param  {Number} index     The index of the image thumbnail
    * @return {HTMLImageElement} HTML element created from given photo data
    */
-  createImageThumbnail(photo, index) {
+  _createImageThumbnail(photo, index) {
     const photoId = photo.id;
     const photoSecret = photo.secret;
     const farmId = photo.farm;
@@ -49,7 +49,7 @@ class PhotoGrid {
     img.alt = photo.title;
     img.className = 'thumbnails-list__thumbnail';
     img.setAttribute('data-index', index);
-    img.addEventListener('click', (evt) => this.photoBox.showModal(evt));
+    img.addEventListener('click', (evt) => this._photoBox.showModal(evt));
 
     return img;
   };
