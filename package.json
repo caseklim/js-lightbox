@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cklimkowsky/js-lightbox.git"
+    "url": "git+https://github.com/caseklim/js-lightbox.git"
   },
   "keywords": [
     "webpack",
@@ -19,7 +19,7 @@
   "author": "Casey Klimkowsky",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cklimkowsky/js-lightbox/issues"
+    "url": "https://github.com/caseklim/js-lightbox/issues"
   },
   "eslintConfig": {
     "env": {
@@ -34,7 +34,7 @@
       "semi": 2
     }
   },
-  "homepage": "https://github.com/cklimkowsky/js-lightbox#readme",
+  "homepage": "https://github.com/caseklim/js-lightbox#readme",
   "devDependencies": {
     "babel-core": "^6.9.0",
     "babel-loader": "^6.2.4",
